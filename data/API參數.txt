@@ -1,0 +1,57 @@
+GET /pharmacies/open
+列出在指定時間和（可選）星期開放的藥局。
+API 請求參數：
+time（必填，字串）：格式為 HH:MM（例如 14:30）。
+day（選填，字串）：星期（例如 monday、tue），不區分大小寫。
+curl "http://127.0.0.1:5000/pharmacies/open?time=14:30&day=monday"
+
+
+GET /pharmacies/<id>/masks</id>
+功能：列出指定藥局的口罩清單，可按價格或名稱排序。
+API 請求參數：
+id（必填，整數）：藥局 ID（例如 2）。
+sort_by（選填，字串）：排序欄位（price 或 name）。
+order（選填，字串）：排序方式（asc 或 desc）。
+curl "http://127.0.0.1:5000/pharmacies/2/masks?sort_by=price&order=asc"
+
+GET /pharmacies/mask_count
+功能：列出符合指定價格和數量範圍的藥局，按口罩總數排序。
+API 請求參數：
+min_price（選填，浮點數）：口罩最低價格。
+max_price（選填，浮點數）：口罩最高價格。
+min_count（選填，整數）：最少口罩數量。
+max_count（選填，整數）：最多口罩數量。
+curl "http://127.0.0.1:5000/pharmacies/mask_count?min_price=1&max_price=10&min_count=1"
+
+
+GET /users/top
+功能：列出指定日期範圍內交易總額最高的前 X 名用戶。
+API 請求參數：
+top_x（必填，整數）：返回前 X 名用戶（例如 5）。
+start_date（選填，字串）：開始日期（格式 YYYY-MM-DD）。
+end_date（選填，字串）：結束日期（格式 YYYY-MM-DD）。
+curl "http://127.0.0.1:5000/users/top?top_x=5&start_date=2023-01-01&end_date=2023-12-31"
+
+GET /transactions/summary
+功能：返回指定日期範圍內的交易總數和總金額。
+API 請求參數：
+start_date（選填，字串）：開始日期（格式 YYYY-MM-DD）。
+end_date（選填，字串）：結束日期（格式 YYYY-MM-DD）。
+curl "http://127.0.0.1:5000/transactions/summary?start_date=2023-01-01&end_date=2023-12-31"
+
+
+GET /search
+功能：根據關鍵字搜尋藥局和口罩。
+API 請求參數：
+query（必填，字串）：搜尋關鍵字（例如 Carepoint）。
+curl "http://127.0.0.1:5000/search?query=Carepoint"
+
+
+POST /purchase
+功能：模擬用戶購買口罩，更新用戶和藥局餘額，記錄交易。
+API 請求參數（JSON 格式）：
+user_id（必填，整數）：用戶 ID。
+mask_id（必填，整數）：口罩 ID。
+quantity（必填，整數）：購買數量。
+curl -X POST -H "Content-Type: application/json" -d "{\"user_id\": 1, \"mask_id\": 1, \"quantity\": 2}" http://127.0.0.1:5000/purchase
+
