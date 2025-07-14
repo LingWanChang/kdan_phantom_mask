@@ -1,0 +1,36 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# pytest cache
+.pytest_cache/
+
+# Coverage reports
+.coverage
+htmlcov/*
+!htmlcov/index.html
+
+# Environment variables
+.env
+.venv/
+venv/
+
+# Docker files
+# docker-compose.override.yml
+
+# IDE settings
+.vscode/
+.idea/
+
+# MacOS 系統檔案
+.DS_Store
+
+# log files
+*.log
+
+# Byte-compiled / optimized / DLL files
+*.so
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
